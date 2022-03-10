@@ -9,16 +9,13 @@
 			if (isset($_GET["identifiant"])){
 				$identifiant = $_GET["identifiant"];
 				getProducts($identifiant);			
-				break;
 			}else{				
 				getCompta();			
-				break;
 			}
 	
 		default:
 			// Requête invalide
 			header("HTTP/1.0 405 Method Not Allowed");
-			break;
 	}
 
     function getProducts($identifiant)	
@@ -35,9 +32,16 @@
                          dateDebut as Debut, 
                          dateFin AS Fin, 
                          valider,
-                         payer 
+                         payer,
+						 CONCAT(c.nomCommune, '(', c.cpCommune, ')') AS Lieu,
+						 CASE 
+                         	WHEN valider = 0 THEN ''
+                         	WHEN valider = 1 AND payer = 1 THEN CONCAT('Validée, ', 'Remboursée')
+                         	WHEN valider = 1 THEN 'Validée'
+                         END AS validation 
                   FROM mission m
                   INNER JOIN salarie s ON s.identifiant = m.identifiantSal
+				  INNER JOIN commune c ON c.idCommune = m.Id_Commune
                   WHERE identifiantResp = '$identifiant'
 				  AND dateDebut BETWEEN '$dateFin' AND '$dateDebut'";
 		$response = array();
@@ -59,10 +63,16 @@
                          dateDebut as Debut, 
                          dateFin AS Fin, 
                          valider,
-                         payer 
+                         payer,
+						 CONCAT(c.nomCommune, '(', c.cpCommune, ')') AS Lieu,
+						 CASE 
+                         	WHEN payer = 0 THEN ''
+                         	WHEN payer = 1 THEN 'Remboursée'
+                         END AS validation 
                   FROM mission m
                   INNER JOIN salarie s ON s.identifiant = m.identifiantSal
-                  WHERE m.valider = '0'";
+				  INNER JOIN commune c ON c.idCommune = m.Id_Commune
+                  WHERE m.valider = '1'";
 		$response = array();
 		$result = mysqli_query($conn, $query);
 		while($row = mysqli_fetch_array($result))

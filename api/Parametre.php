@@ -7,7 +7,6 @@
 	{
 		case 'GET':	
             getParametre();
-            break;
 
         case 'PUT':
             putParametre();
@@ -15,7 +14,6 @@
 		default:
 			// Requête invalide
 			header("HTTP/1.0 405 Method Not Allowed");
-			break;
 	}
 
     function getParametre()
