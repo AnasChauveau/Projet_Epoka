@@ -1,16 +1,28 @@
 Nouvelle mission: insert dateDebut-Fin, lieu, ident
 =
-Requete Authentification
+
+
+Requete Authentification (select)
 =
-Requete de vérif de statuts Salarié
+
+
+Requete de vérif de statuts Salarié (select)
 =
-Requete de vérif de statuts Mission
+Requete de vérif de statuts Mission "subordonnés" (select)
 = OK
-Requete de vérif de statuts Mission pour compta
-=
-Requete de validation
-=
-Requete de mission valider
+Requete de mission déjà valider ou valider et remboursée (select)
 = OK
-Requete de rembourssement
+Requete de validation (update)
+=
+
+
+Requete de vérif de statuts Mission pour compta "compta = 1" (select)
+=
+Requete du Montant "calcule parametre" (select)
+=
+Requete de remboursement (update)
+=
+Requete de mission déjà rembourser (select)
+=
+Requete distance non défini
 =

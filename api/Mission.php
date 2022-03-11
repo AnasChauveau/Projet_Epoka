@@ -26,7 +26,6 @@
 		date_sub($dateToday, date_interval_create_from_date_string('30 days'));
 		$dateFin = date_format($dateToday, 'Y-m-d');
 		$query = "SELECT
-						 DATEDIFF(dateFin, dateDebut) AS Duree, 
                          prenomSal AS Prenom,
                          nomSal AS Nom,
                          dateDebut as Debut, 
@@ -58,6 +57,7 @@
 	{
 		global $conn;
 		$query = "SELECT
+						 DATEDIFF(dateFin, dateDebut) AS Duree, 
                          prenomSal AS Prenom,
                          nomSal AS Nom,
                          dateDebut as Debut, 
