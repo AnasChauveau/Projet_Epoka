@@ -56,23 +56,31 @@
 	function getCompta()
 	{
 		global $conn;
-		$query = "SELECT
-						 DATEDIFF(dateFin, dateDebut) AS Duree, 
-                         prenomSal AS Prenom,
-                         nomSal AS Nom,
-                         dateDebut as Debut, 
-                         dateFin AS Fin, 
-                         valider,
-                         payer,
-						 CONCAT(c.nomCommune, '(', c.cpCommune, ')') AS Lieu,
-						 CASE 
-                         	WHEN payer = 0 THEN ''
-                         	WHEN payer = 1 THEN 'Remboursée'
-                         END AS validation 
-                  FROM mission m
-                  INNER JOIN salarie s ON s.identifiant = m.identifiantSal
-				  INNER JOIN commune c ON c.idCommune = m.Id_Commune
-                  WHERE m.valider = '1'";
+		$query = "SELECT DISTINCT
+						DATEDIFF(dateFin, dateDebut)*forfaitJours AS Duree, 
+						prenomSal AS Prenom,
+						nomSal AS Nom,
+						ca.nomCommune,
+						cm.nomCommune,
+						dateDebut as Debut, 
+						dateFin AS Fin, 
+						valider,
+						payer,
+						Distance,
+						CONCAT(ca.nomCommune, '(', ca.cpCommune, ')') AS Lieu,
+						CASE 
+							WHEN isnull(Distance) = 1 AND payer = 0 THEN CONCAT('Distance entre ', ca.nomCommune, ' et ', cm.nomCommune, ' non defini') 
+							WHEN payer = 0 THEN ''
+							WHEN payer = 1 THEN 'Remboursée'
+						END AS remboursement
+				FROM salarie s
+				INNER JOIN mission m ON m.identifiantSal = s.Identifiant
+				INNER JOIN parametre
+				INNER JOIN agence a ON a.idAgence = s.Id_Agence
+				INNER JOIN commune cm ON cm.idCommune = m.Id_Commune
+				INNER JOIN commune ca ON ca.idCommune = a.Id_Commune
+				LEFT JOIN relier r ON r.Id_Commune1 = cm.idCommune AND r.Id_Commune2 = ca.idCommune
+				WHERE m.valider = '1'";
 		$response = array();
 		$result = mysqli_query($conn, $query);
 		while($row = mysqli_fetch_array($result))
