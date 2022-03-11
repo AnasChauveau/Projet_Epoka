@@ -1,0 +1,16 @@
+Nouvelle mission: insert dateDebut-Fin, lieu, ident
+=
+Requete Authentification
+=
+Requete de vérif de statuts Salarié
+=
+Requete de vérif de statuts Mission
+= OK
+Requete de vérif de statuts Mission pour compta
+=
+Requete de validation
+=
+Requete de mission valider
+= OK
+Requete de rembourssement
+=
