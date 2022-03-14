@@ -56,18 +56,16 @@
 	function getCompta()
 	{
 		global $conn;
-		$query = "SELECT DISTINCT
-						DATEDIFF(dateFin, dateDebut)*forfaitJours AS Duree, 
+		$req = "SELECT DISTINCT
+						DATEDIFF(dateFin, dateDebut)*forfaitJours AS Paiement, 
 						prenomSal AS Prenom,
 						nomSal AS Nom,
-						ca.nomCommune,
-						cm.nomCommune,
 						dateDebut as Debut, 
 						dateFin AS Fin, 
 						valider,
 						payer,
 						Distance,
-						CONCAT(ca.nomCommune, '(', ca.cpCommune, ')') AS Lieu,
+						CONCAT(cm.nomCommune, '(', cm.cpCommune, ')') AS Lieu,
 						CASE 
 							WHEN isnull(Distance) = 1 AND payer = 0 THEN CONCAT('Distance entre ', ca.nomCommune, ' et ', cm.nomCommune, ' non defini') 
 							WHEN payer = 0 THEN ''
@@ -80,14 +78,21 @@
 				INNER JOIN commune cm ON cm.idCommune = m.Id_Commune
 				INNER JOIN commune ca ON ca.idCommune = a.Id_Commune
 				LEFT JOIN relier r ON r.Id_Commune1 = cm.idCommune AND r.Id_Commune2 = ca.idCommune
-				WHERE m.valider = '1'";
-		$response = array();
-		$result = mysqli_query($conn, $query);
-		while($row = mysqli_fetch_array($result))
-		{
-			$response[] = $row;
-		}
-		header('Content-Type: application/json');
-		echo json_encode($response, JSON_PRETTY_PRINT);
+				WHERE m.valider = '1';";
+		$req = $conn->prepare($req);
+		$req->execute();
+		$row = $req->fetchAll(PDO::FETCH_ASSOC);
+		print_r($row);
+		
+		/*while ($row = $req->fetch()) {
+			echo (json_encode($row["prenom"], JSON_PRETTY_PRINT));
+			echo("<br><br>");
+		}*/
+		/*$response = array();
+		$result = $req->fetchAll(PDO::FETCH_ASSOC);
+		foreach($result as $key => $value) {
+			echo ($key);
+			$response[] = $key; 
+		}*/
 	}
 ?>
