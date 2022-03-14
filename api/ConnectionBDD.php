@@ -1,7 +1,6 @@
 <?php
-	$server = "localhost";
-	$username = "root";
-	$password = "root";
-	$db = "epoka";
-	$conn = mysqli_connect($server, $username, $password, $db);
+        string $dsn = 'mysql:dbname=epoka;host=localhost';
+        string $username = "root";
+        string $password = "root";
+	$conn = new PDO($dsn, $user, $password);
 ?>
