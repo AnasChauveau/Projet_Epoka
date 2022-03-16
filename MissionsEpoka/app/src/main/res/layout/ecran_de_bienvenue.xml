@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#000000"
+    tools:context=".EcranBienvenue"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160sp"
+        android:text="Missions"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="60sp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60sp"
+        android:text="EPOKA"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="60sp" />
+</LinearLayout>
+

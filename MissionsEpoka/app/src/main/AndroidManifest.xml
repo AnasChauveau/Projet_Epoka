@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MissionsEpoka">
         <activity
-            android:name=".MainActivity"
+            android:name=".EcranBienvenue"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
