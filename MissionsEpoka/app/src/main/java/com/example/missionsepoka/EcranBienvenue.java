@@ -14,24 +14,25 @@ public class EcranBienvenue extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.ecran_de_bienvenue);
-    }
 
-    CountDownTimer countDownTimer = new CountDownTimer(2000,2000) {
+        CountDownTimer countDownTimer = new CountDownTimer(2000,2000) {
 
 
-        @Override
-        public void onFinish() {
-            Intent intent = new Intent(getApplicationContext(), EcranConnexion.class);
-            intent.setFlags((Intent.FLAG_ACTIVITY_CLEAR_TASK+Intent.FLAG_ACTIVITY_NEW_TASK));
-            startActivity(intent);
-            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out );
+            @Override
+            public void onFinish() {
+                Intent intent = new Intent(getApplicationContext(),EcranConnexion.class);
+                intent.setFlags((Intent.FLAG_ACTIVITY_CLEAR_TASK+Intent.FLAG_ACTIVITY_NEW_TASK));
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out );
 
-        }
-        @Override
-        public void onTick(long milisUntilfinished) {
+            }
+            @Override
+            public void onTick(long milisUntilfinished) {
 
-        }
-    };
+            }
+        };
         countDownTimer.start();
+    }
 }

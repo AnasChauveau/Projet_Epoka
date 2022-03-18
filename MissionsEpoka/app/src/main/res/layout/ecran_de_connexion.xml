@@ -33,11 +33,13 @@
         android:id="@+id/EtPseudo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/backwithborder"
         android:ems="10"
         android:inputType="textPersonName"
         android:textAllCaps="true"
         android:textColor="#FFFFFF"
-        android:textSize="25sp" />
+        android:textSize="35sp"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textView5"
@@ -51,18 +53,27 @@
         android:id="@+id/EtMdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/backwithborder"
         android:ems="10"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         android:textColor="#FFFFFF"
-        android:textSize="25sp" />
+        android:textSize="35sp"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/BtnConnexion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:onClick="recherche"
         android:text="Se connecter"
         android:textAllCaps="false"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvResultat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
 </LinearLayout>
