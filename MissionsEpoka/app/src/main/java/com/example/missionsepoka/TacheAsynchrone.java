@@ -40,20 +40,16 @@ import java.net.URL;
             connexion.connect();
             inputStream = connexion.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            String ligne;
-            while ((ligne = bufferedReader.readLine()) != null) {
-                res += ligne + "\n"; //
-                // données délimités par "\n" dans php, ici "\n" permet le saut à la ligne
+            res = bufferedReader.readLine();
 
-                //débodage JSON
-                String resultat = "";
-                JSONArray jsonArray = new JSONArray(res);
-                for (int i = 0; i<jsonArray.length(); i++){
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    resultat += " - " + jsonObject.getString("identifiant") + " - (" + jsonObject.getString("nomSal") + ")\n";
-                }
+            //débodage JSON
+            String resultat = "";
+            JSONArray jsonArray = new JSONArray(res);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            resultat += jsonObject.getString("identifiant");
+
                 return resultat;
-            }
+
         } catch (Exception e) {
             Toast.makeText(activityApp ,"erreur : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT);
         }

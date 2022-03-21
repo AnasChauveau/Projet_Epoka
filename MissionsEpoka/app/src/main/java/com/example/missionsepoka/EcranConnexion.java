@@ -20,20 +20,17 @@ public class EcranConnexion extends Activity {
 
     }
 
-    public void Connexion() {
+    public void recherche() {
         super.onBackPressed();
         EditText identifiant;
-        EditText motDePasse;
+        EditText mdp;
 
         identifiant = (EditText) findViewById(R.id.EtPseudo);
-        motDePasse = (EditText) findViewById(R.id.EtMdp);
-    }
-
-    public void recherche(View view) {
-        tvResultat.setText("Villes débutant par " + ":\n");
+        mdp = (EditText) findViewById(R.id.EtMdp);
+        tvResultat.setText("Bonjour : ");
 
         TacheAsynchrone tacheAsynchrone = new TacheAsynchrone();
-        tacheAsynchrone.urlServiceWeb = "https://zaraco-layenne.alwaysdata.net/Salarie.php?identifiant=marco&mdp=ggg";
+        tacheAsynchrone.urlServiceWeb = "https://zaraco-layenne.alwaysdata.net/Salarie.php?identifiant="+identifiant.getText()+"&mdp="+mdp.getText();
         tacheAsynchrone.activityApp = this;
         tacheAsynchrone.execute();
     }
