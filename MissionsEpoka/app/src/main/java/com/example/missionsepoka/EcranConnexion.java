@@ -20,8 +20,7 @@ public class EcranConnexion extends Activity {
 
     }
 
-    public void recherche() {
-        super.onBackPressed();
+    public void connexion(View v) {
         EditText identifiant;
         EditText mdp;
 

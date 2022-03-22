@@ -46,9 +46,13 @@ import java.net.URL;
             String resultat = "";
             JSONArray jsonArray = new JSONArray(res);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
-            resultat += jsonObject.getString("identifiant");
+            if(jsonObject.getBoolean("err") == true){
+                resultat = "";
+            }else {
+                resultat += jsonObject.getString("identifiant");
+            }
 
-                return resultat;
+            return resultat;
 
         } catch (Exception e) {
             Toast.makeText(activityApp ,"erreur : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT);
