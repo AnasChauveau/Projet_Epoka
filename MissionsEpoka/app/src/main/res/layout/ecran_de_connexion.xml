@@ -65,6 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="10sp"
         android:onClick="connexion"
         android:text="Se connecter"
         android:textAllCaps="false"
@@ -74,7 +75,7 @@
         android:id="@+id/tvResultat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="pute"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
 
 </LinearLayout>

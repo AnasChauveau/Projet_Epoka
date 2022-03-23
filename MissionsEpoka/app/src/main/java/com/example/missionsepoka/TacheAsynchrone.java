@@ -1,6 +1,7 @@
 package com.example.missionsepoka;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -46,10 +47,17 @@ import java.net.URL;
             String resultat = "";
             JSONArray jsonArray = new JSONArray(res);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
-            if(jsonObject.getBoolean("err") == true){
-                resultat = "";
+            Salarie salarie = new Salarie();
+            salarie.prenom = jsonObject.getString("prenomSal");
+            salarie.nom = jsonObject.getString("nomSal");
+            salarie.identifiant = jsonObject.getString("identifiant");
+            if(jsonObject.getString("err").equals("1")){
+                resultat = jsonObject.getString("erreur");
             }else {
-                resultat += jsonObject.getString("identifiant");
+                Intent intent = new Intent(activityApp.getApplicationContext(),EcranAccueil.class);
+                intent.setFlags((Intent.FLAG_ACTIVITY_CLEAR_TASK+Intent.FLAG_ACTIVITY_NEW_TASK));
+                activityApp.startActivity(intent);
+                activityApp.overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out );
             }
 
             return resultat;
@@ -59,4 +67,21 @@ import java.net.URL;
         }
         return res;
     }
+
+    class Salarie{
+        private String prenom = "";
+        private String nom = "" ;
+        private String identifiant = "";
+
+        public void setSalarie(String nom,String prenom,String identifiant){
+            this.prenom = prenom;
+            this.nom = nom;
+            this.identifiant = identifiant;
+        }
+
+        public String getSalarie(){
+
+        }
+    }
+
 }

@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".EcranConnexion" />
+        <activity android:name=".EcranAccueil" />
     </application>
 
 </manifest>
