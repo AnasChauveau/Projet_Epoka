@@ -18,6 +18,7 @@ import java.net.URL;
 
         public String urlServiceWeb;
         public Activity activityApp;
+        public static String EXTRA_MESSAGE = "";
 
         @Override
         protected String doInBackground(Void... voids) {
@@ -47,13 +48,12 @@ import java.net.URL;
             String resultat = "";
             JSONArray jsonArray = new JSONArray(res);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
-            Salarie salarie = new Salarie();
-            salarie.prenom = jsonObject.getString("prenomSal");
-            salarie.nom = jsonObject.getString("nomSal");
-            salarie.identifiant = jsonObject.getString("identifiant");
+            BDD.Salarie salarie = new BDD.Salarie();
             if(jsonObject.getString("err").equals("1")){
                 resultat = jsonObject.getString("erreur");
             }else {
+                salarie.Salarie(jsonObject.getString("nomSal"), jsonObject.getString("prenomSal"), jsonObject.getString("identifiant"));
+                EXTRA_MESSAGE = salarie.getIdentite();
                 Intent intent = new Intent(activityApp.getApplicationContext(),EcranAccueil.class);
                 intent.setFlags((Intent.FLAG_ACTIVITY_CLEAR_TASK+Intent.FLAG_ACTIVITY_NEW_TASK));
                 activityApp.startActivity(intent);
@@ -67,21 +67,4 @@ import java.net.URL;
         }
         return res;
     }
-
-    class Salarie{
-        private String prenom = "";
-        private String nom = "" ;
-        private String identifiant = "";
-
-        public void setSalarie(String nom,String prenom,String identifiant){
-            this.prenom = prenom;
-            this.nom = nom;
-            this.identifiant = identifiant;
-        }
-
-        public String getSalarie(){
-
-        }
-    }
-
 }

@@ -32,6 +32,4 @@ public class EcranConnexion extends AppCompatActivity {
         tacheAsynchrone.activityApp = this;
         tacheAsynchrone.execute();
     }
-
-
 }
