@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".EcranConnexion" />
         <activity android:name=".EcranAccueil" />
+        <activity android:name=".EcranMission" />
     </application>
 
 </manifest>

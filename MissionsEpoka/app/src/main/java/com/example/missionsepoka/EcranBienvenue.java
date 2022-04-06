@@ -23,7 +23,7 @@ public class EcranBienvenue extends Activity {
             @Override
             public void onFinish() {
                 Intent intent = new Intent(getApplicationContext(),EcranConnexion.class);
-                intent.setFlags((Intent.FLAG_ACTIVITY_CLEAR_TASK+Intent.FLAG_ACTIVITY_NEW_TASK));
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK+Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out );
 

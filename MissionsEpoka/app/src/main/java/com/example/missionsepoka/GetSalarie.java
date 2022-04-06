@@ -14,11 +14,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-    public class TacheAsynchrone extends AsyncTask<Void, Integer, String> {
+    public class GetSalarie extends AsyncTask<Void, Integer, String> {
 
         public String urlServiceWeb;
         public Activity activityApp;
-        public static String EXTRA_MESSAGE = "";
+        public static String identite = "";
 
         @Override
         protected String doInBackground(Void... voids) {
@@ -27,7 +27,6 @@ import java.net.URL;
 
         @Override
         protected void onPostExecute (String resultat){
-            EcranConnexion.tvResultat.append(resultat); // importe tvResultat de main activity grace au statique
         }
 
 
@@ -53,7 +52,7 @@ import java.net.URL;
                 resultat = jsonObject.getString("erreur");
             }else {
                 salarie.Salarie(jsonObject.getString("nomSal"), jsonObject.getString("prenomSal"), jsonObject.getString("identifiant"));
-                EXTRA_MESSAGE = salarie.getIdentite();
+                identite = salarie.getIdentite();
                 Intent intent = new Intent(activityApp.getApplicationContext(),EcranAccueil.class);
                 intent.setFlags((Intent.FLAG_ACTIVITY_CLEAR_TASK+Intent.FLAG_ACTIVITY_NEW_TASK));
                 activityApp.startActivity(intent);
