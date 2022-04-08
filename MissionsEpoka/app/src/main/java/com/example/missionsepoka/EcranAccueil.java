@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class EcranAccueil extends Activity {
+public class EcranAccueil extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,9 @@ public class EcranAccueil extends Activity {
     }
 
     public void Quitter(View v){
-        System.exit(0);
+        Intent intent = new Intent(getApplicationContext(),EcranConnexion.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK+Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     public void Valider(View vw){

@@ -26,7 +26,8 @@ import java.net.URL;
         }
 
         @Override
-        protected void onPostExecute (String resultat){
+        protected void onPostExecute (String result){
+            EcranConnexion.tvErreur.setText(result);
         }
 
 
@@ -50,6 +51,7 @@ import java.net.URL;
             BDD.Salarie salarie = new BDD.Salarie();
             if(jsonObject.getString("err").equals("1")){
                 resultat = jsonObject.getString("erreur");
+
             }else {
                 salarie.Salarie(jsonObject.getString("nomSal"), jsonObject.getString("prenomSal"), jsonObject.getString("identifiant"));
                 identite = salarie.getIdentite();

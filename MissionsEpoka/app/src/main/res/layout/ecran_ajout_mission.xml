@@ -15,7 +15,7 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Date du départ :" />
 
         <EditText
             android:id="@+id/editTextDate2"
@@ -37,7 +37,7 @@
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MOMMY" />
+            android:text="Date de retour :" />
 
         <EditText
             android:id="@+id/editTextDate"
@@ -64,6 +64,13 @@
             android:gravity="center_vertical"
             android:hint="Selectionner la commune"
             android:padding="12dp" />
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
 </LinearLayout>
