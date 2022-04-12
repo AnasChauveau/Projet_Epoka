@@ -4,7 +4,7 @@ Nouvelle mission: insert dateDebut-Fin, lieu, ident (insert)
 
 °GLOBAL°
 Requete Authentification (select)
-=
+= OK
 
 °SUPERIEUR°
 Requete de vérif de statuts Salarié (select)

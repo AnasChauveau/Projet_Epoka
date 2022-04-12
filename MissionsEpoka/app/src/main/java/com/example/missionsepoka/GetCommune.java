@@ -45,6 +45,7 @@ public class GetCommune extends AsyncTask<Void, Integer, String> {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String ligne;
             Commune = new ArrayList<>();
+
             while ((ligne = bufferedReader.readLine()) != null) {
                 res += ligne + "\n"; //
                 // données délimités par "\n" dans php, ici "\n" permet le saut à la ligne

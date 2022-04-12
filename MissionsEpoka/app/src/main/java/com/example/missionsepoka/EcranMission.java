@@ -11,16 +11,9 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.ArrayList;
 
 public class EcranMission extends Activity {
 
@@ -76,5 +69,24 @@ public class EcranMission extends Activity {
                 });
             }
         });
+    }
+
+    public void Envoyer(View v){
+        EditText dateDebut;
+        EditText dateFin;
+        TextView commune;
+        String identifiant;
+
+        dateDebut = (EditText) findViewById(R.id.etDateDebut);
+        dateFin = (EditText) findViewById(R.id.etDateFin);
+        commune = (TextView) findViewById(R.id.tvRecherche);
+        BDD.Salarie salarie = new BDD.Salarie();
+        identifiant = salarie.getIdentite();
+
+        PostMission tacheAsynchrone = new PostMission();
+        tacheAsynchrone.urlServiceWeb = "https://zaraco-layenne.alwaysdata.net/Ajout_mission.php";
+        tacheAsynchrone.postData = "dateDebut=" + dateDebut.getText() + "dateFin=" + dateFin.getText() + "identifiant=" + identifiant + "idCommune=" + commune.getText();
+        tacheAsynchrone.activityApp = this;
+        tacheAsynchrone.execute();
     }
 }
