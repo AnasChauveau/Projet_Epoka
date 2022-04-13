@@ -2,6 +2,7 @@ package com.example.missionsepoka;
 
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -11,12 +12,19 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class EcranMission extends Activity {
+import java.util.Calendar;
 
+public class EcranMission extends Activity {
+    public static TextView tvTestErreur;
+
+    EditText dateDebut;
+    EditText dateFin;
+    DatePickerDialog.OnDateSetListener setListener;
     TextView textView;
     Dialog dialog;
 
@@ -25,7 +33,54 @@ public class EcranMission extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ecran_ajout_mission);
 
+        dateDebut = (EditText) findViewById(R.id.etDateDebut);
+        dateFin = (EditText) findViewById(R.id.etDateFin);
+
         textView = findViewById(R.id.tvRecherche);
+        tvTestErreur = (TextView)  findViewById(R.id.tvTestErreur);
+
+        Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        dateDebut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        EcranMission.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        setListener,year,month,day);
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.show();
+            }
+        });
+
+        setListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+                String date = day+"/"+month+"/"+year;
+                dateDebut.setText(date);
+            }
+        };
+
+        dateDebut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        EcranMission.this, new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet (DatePicker view, int year, int month, int day) {
+                                month = month +1;
+                                String date = day+"/"+month+"/"+year;
+                                dateDebut.setText(date);
+                            }
+                },year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
+
 
         textView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -72,20 +127,21 @@ public class EcranMission extends Activity {
     }
 
     public void Envoyer(View v){
-        EditText dateDebut;
-        EditText dateFin;
         TextView commune;
-        String identifiant;
 
-        dateDebut = (EditText) findViewById(R.id.etDateDebut);
-        dateFin = (EditText) findViewById(R.id.etDateFin);
+
         commune = (TextView) findViewById(R.id.tvRecherche);
-        BDD.Salarie salarie = new BDD.Salarie();
-        identifiant = salarie.getIdentite();
+        String idCommune = commune.getText().toString();
+        String[] tableCommune = idCommune.split("-");
+
+
 
         PostMission tacheAsynchrone = new PostMission();
         tacheAsynchrone.urlServiceWeb = "https://zaraco-layenne.alwaysdata.net/Ajout_mission.php";
-        tacheAsynchrone.postData = "dateDebut=" + dateDebut.getText() + "dateFin=" + dateFin.getText() + "identifiant=" + identifiant + "idCommune=" + commune.getText();
+        tacheAsynchrone.identifiant = GetSalarie.pseudo;
+        tacheAsynchrone.dateDebut = dateDebut.getText().toString();
+        tacheAsynchrone.dateFin = dateFin.getText().toString();
+        tacheAsynchrone.idCommune = tableCommune[1];
         tacheAsynchrone.activityApp = this;
         tacheAsynchrone.execute();
     }

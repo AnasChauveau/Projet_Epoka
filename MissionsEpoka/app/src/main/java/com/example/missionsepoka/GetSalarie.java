@@ -19,6 +19,7 @@ import java.net.URL;
         public String urlServiceWeb;
         public Activity activityApp;
         public static String identite = "";
+        public static String pseudo = "";
 
         @Override
         protected String doInBackground(Void... voids) {
@@ -55,6 +56,7 @@ import java.net.URL;
             }else {
                 salarie.Salarie(jsonObject.getString("nomSal"), jsonObject.getString("prenomSal"), jsonObject.getString("identifiant"));
                 identite = salarie.getIdentite();
+                pseudo = salarie.getIdentifiant();
                 Intent intent = new Intent(activityApp.getApplicationContext(),EcranAccueil.class);
                 intent.setFlags((Intent.FLAG_ACTIVITY_CLEAR_TASK+Intent.FLAG_ACTIVITY_NEW_TASK));
                 activityApp.startActivity(intent);

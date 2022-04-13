@@ -15,7 +15,7 @@
 		newMission($identifiant, $idCommune, $dateDebut, $dateFin);
 	}else{
 		$errJson = [
-				   		["err" => "1", "erreur" => "Veuillez vérifier les champs !"]
+				   		["erreur" => "Veuillez vérifier les champs !"]
 				   ];
 		echo json_encode($errJson);
 	}

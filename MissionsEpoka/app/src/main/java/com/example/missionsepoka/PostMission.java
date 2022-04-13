@@ -12,14 +12,20 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 
 public class PostMission extends AsyncTask<Void, Integer, String> {
 
     public String urlServiceWeb;
     public Activity activityApp;
-    public String postData;
+    public String identifiant;
+    public String dateDebut;
+    public String dateFin;
+    public String idCommune;
 
     @Override
     protected String doInBackground(Void... voids) {
@@ -28,7 +34,7 @@ public class PostMission extends AsyncTask<Void, Integer, String> {
 
     @Override
     protected void onPostExecute (String result){
-        EcranConnexion.tvErreur.setText(result);
+        EcranMission.tvTestErreur.setText(result);
     }
 
 
@@ -40,35 +46,32 @@ public class PostMission extends AsyncTask<Void, Integer, String> {
         try {
 
             url = new URL(urlService);
-            HttpURLConnection connexion = (HttpURLConnection)url.openConnection();
-            connexion.setRequestMethod("POST");
-            connexion.setDoOutput(true);
-            connexion.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connexion.setRequestProperty("Content-Length", Integer.toString(postData.length()));
-            connexion.setUseCaches(false);
-
-            try (DataOutputStream dos = new DataOutputStream(connexion.getOutputStream())) {
-                dos.writeBytes(postData);
+            URLConnection con = url.openConnection();
+            con.setDoOutput(true);
+            PrintStream ps = new PrintStream(con.getOutputStream());
+            ps.print("identifiant="+identifiant);
+            ps.print("&dateDebut="+dateDebut);
+            ps.print("&dateFin="+dateFin);
+            ps.print("&idCommune="+idCommune);
+            con.connect();
+            inputStream = con.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            res = bufferedReader.readLine();
+            String resultat = "";
+            if(res == null){
+                ps.close();
+                resultat = "La mission a bien été enregistré";
+            }else {
+                //débodage JSON
+                JSONArray jsonArray = new JSONArray(res);
+                JSONObject jsonObject = jsonArray.getJSONObject(0);
+                resultat = jsonObject.getString("erreur");
             }
 
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                    connexion.getInputStream())))
-            {
-                String line;
-                while ((line = br.readLine()) != null) {
-                    System.out.println(line);
-                }
-            }
-
-            Intent intent = new Intent(activityApp.getApplicationContext(),EcranAccueil.class);
-            intent.setFlags((Intent.FLAG_ACTIVITY_CLEAR_TASK+Intent.FLAG_ACTIVITY_NEW_TASK));
-            activityApp.startActivity(intent);
-            activityApp.overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out );
-
-            return res;
+            return resultat;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Toast.makeText(activityApp ,"Erreur lors de l'insertion de la mission !", Toast.LENGTH_SHORT);
         }
 
         return res;

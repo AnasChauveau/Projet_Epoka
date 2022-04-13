@@ -18,5 +18,10 @@ public class BDD {
             return identite;
         }
 
+        public String getIdentifiant(){
+            String pseudo = this.identifiant;
+            return pseudo;
+        }
+
     }
 }

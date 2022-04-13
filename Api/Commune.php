@@ -13,7 +13,7 @@
 	{
 		global $conn;
 		$err = false;
-		$req = "SELECT idCommune AS ID, CONCAT(c.nomCommune, ' (' , c.cpCommune, ')', idCommune) AS Commune, false AS err FROM commune c";
+		$req = "SELECT idCommune AS ID, CONCAT(c.nomCommune, ' (' , c.cpCommune, ')', '-', idCommune) AS Commune, false AS err FROM commune c";
 		$req = $conn->prepare($req);
 		$req->execute();
 		$row = $req->fetchAll(PDO::FETCH_ASSOC);
