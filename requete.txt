@@ -1,10 +1,10 @@
 °ANDROID°
 Nouvelle mission: insert dateDebut-Fin, lieu, ident (insert)
-=
+= OK
 
 °GLOBAL°
 Requete Authentification (select)
-= OK
+= OK (à metre en POST pour l'api)
 
 °SUPERIEUR°
 Requete de vérif de statuts Salarié (select)
@@ -17,26 +17,22 @@ Requete de validation (update)
 =
 
 °COMPTA°
-Requete de vérif de statuts Mission pour compta "compta = 1" (select)
-=
 P1: Paiement des frais
 (Requete mission + verif distance + Montant "calcule parametre" (select)
-=
+= OK
 Requete de mission déjà rembourser (select)
-= )
+= OK)
 Requete de remboursement (update)
 =
 P2: Paramétrage Km
 Requete recup parametre "Bouton Paramétrage" (select)
-=
-Requete modif parametre "Bouton Validé" (update)
-=
+= OK)
+Requete modif parametre (update)
+= OK
 P3: Distance
 Requete commune + distance (select)
-=
-Requete nouvelle distance "Bouton Validé" (insert)
-=
-
-Durée*indemnité + (distance*2)*prixKm
+= 
+Requete nouvelle distance (insert)
+= OK
 
 

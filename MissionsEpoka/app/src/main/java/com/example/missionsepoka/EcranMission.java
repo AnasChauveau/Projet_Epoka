@@ -80,6 +80,42 @@ public class EcranMission extends Activity {
             }
         });
 
+        dateFin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        EcranMission.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        setListener,year,month,day);
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.show();
+            }
+        });
+
+        setListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+                String date = day+"/"+month+"/"+year;
+                dateFin.setText(date);
+            }
+        };
+
+        dateFin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        EcranMission.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet (DatePicker view, int year, int month, int day) {
+                        month = month +1;
+                        String date = day+"/"+month+"/"+year;
+                        dateFin.setText(date);
+                    }
+                },year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
 
 
         textView.setOnClickListener(new View.OnClickListener(){
@@ -132,15 +168,21 @@ public class EcranMission extends Activity {
 
         commune = (TextView) findViewById(R.id.tvRecherche);
         String idCommune = commune.getText().toString();
-        String[] tableCommune = idCommune.split("-");
+        String[] tableCommune = idCommune.split("_");
 
+        String dateDepart;
+        String dateArrive;
 
+        StringBuilder Depart = new StringBuilder(dateDebut.getText().toString());
+        dateDepart = (String) Depart.reverse().toString();
+        StringBuilder Arrive = new StringBuilder(dateFin.getText().toString());
+        dateArrive = (String) Arrive.reverse().toString();
 
         PostMission tacheAsynchrone = new PostMission();
         tacheAsynchrone.urlServiceWeb = "https://zaraco-layenne.alwaysdata.net/Ajout_mission.php";
         tacheAsynchrone.identifiant = GetSalarie.pseudo;
-        tacheAsynchrone.dateDebut = dateDebut.getText().toString();
-        tacheAsynchrone.dateFin = dateFin.getText().toString();
+        tacheAsynchrone.dateDebut = dateDepart;
+        tacheAsynchrone.dateFin = dateArrive;
         tacheAsynchrone.idCommune = tableCommune[1];
         tacheAsynchrone.activityApp = this;
         tacheAsynchrone.execute();

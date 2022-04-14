@@ -59,4 +59,29 @@
 		}	
 		
 	}
+
+	function getSalarie($identifiant, $mdp)
+	{
+		global $conn;
+		$err = false;
+		$req = "SELECT identifiant,
+                       nomSal,
+                       prenomSal
+                FROM salarie
+				WHERE mdp = :mdp
+				AND identifiant = :identifiant";
+		$req = $conn->prepare($req);
+		$req->bindParam(':mdp', $mdp);
+		$req->bindParam(':identifiant', $identifiant);
+		$req->execute();
+		$row = $req->fetchAll(PDO::FETCH_ASSOC);
+		if (!empty($row)){
+			foreach ($row as $item){
+				echo ($item);
+			}
+		}else{
+			echo ("err");
+		}	
+		
+	}
 ?>

@@ -67,21 +67,19 @@
 	{
 		global $conn;
 		$err = false;
-		$req = "SELECT DISTINCT
-						DATEDIFF(dateFin, dateDebut)*forfaitJours AS Paiement, 
-						prenomSal AS Prenom,
-						nomSal AS Nom,
-						dateDebut as Debut, 
-						dateFin AS Fin, 
-						valider,
-						payer,
-						Distance,
-						CONCAT(cm.nomCommune, '(', cm.cpCommune, ')') AS Lieu,
-						CASE 
-							WHEN isnull(Distance) = 1 AND payer = 0 THEN CONCAT('Distance entre ', ca.nomCommune, ' et ', cm.nomCommune, ' non defini') 
-							WHEN payer = 0 THEN ''
-							WHEN payer = 1 THEN 'Remboursée'
-						END AS remboursement
+		$req = "SELECT DISTINCT 
+					prenomSal AS Prenom,
+					nomSal AS Nom,
+					dateDebut as Debut, 
+					dateFin AS Fin, 
+					payer,
+					Distance,
+					CONCAT(cm.nomCommune, '(', cm.cpCommune, ')') AS Lieu,
+					CASE 
+						WHEN isnull(Distance) = 1 AND payer = 0 THEN CONCAT('Distance entre ', ca.nomCommune, ' et ', cm.nomCommune, ' non defini') 
+						WHEN payer = 0 THEN (Distance*forfaitKm)+(DATEDIFF(dateFin, dateDebut)*forfaitJours)
+						WHEN payer = 1 THEN 'Remboursée'
+					END AS remboursement
 				FROM salarie s
 				INNER JOIN mission m ON m.identifiantSal = s.Identifiant
 				INNER JOIN parametre

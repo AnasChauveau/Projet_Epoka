@@ -30,6 +30,7 @@
 		$req = "SELECT identifiant,
                        nomSal,
                        prenomSal,
+					   comptable
 					   false AS err
                 FROM salarie
 				WHERE mdp = :mdp
