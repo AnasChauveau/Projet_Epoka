@@ -1,0 +1,21 @@
+SELECT DISTINCT 
+					prenomSal AS Prenom,
+					nomSal AS Nom,
+					dateDebut as Debut, 
+					dateFin AS Fin, 
+					payer,
+					Distance,
+					CONCAT(cm.nomCommune, '(', cm.cpCommune, ')') AS Lieu,
+					CASE 
+						WHEN isnull(Distance) = 1 AND payer = 0 THEN CONCAT('Distance entre ', ca.nomCommune, ' et ', cm.nomCommune, ' non defini') 
+						WHEN payer = 0 THEN ((Distance*2)*forfaitKm)+(DATEDIFF(dateFin, dateDebut)*forfaitJours)
+						WHEN payer = 1 THEN 'Remboursée'
+					END AS remboursement
+				FROM salarie s
+				INNER JOIN mission m ON m.identifiantSal = s.Identifiant
+				INNER JOIN parametre
+				INNER JOIN agence a ON a.idAgence = s.Id_Agence
+				INNER JOIN commune cm ON cm.idCommune = m.Id_Commune
+				INNER JOIN commune ca ON ca.idCommune = a.Id_Commune
+				LEFT JOIN relier r ON r.Id_Commune1 = cm.idCommune AND r.Id_Commune2 = ca.idCommune
+				WHERE m.valider = '1';

@@ -1,0 +1,1 @@
+UPDATE mission SET payer = 1 WHERE idMission = :idMission;

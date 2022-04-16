@@ -1,0 +1,116 @@
+﻿body {
+    background-size: cover;
+    background-color: #82bdc7;
+}
+
+#content {
+    width: 100%;
+}
+
+img {
+    width: 193px;
+}
+
+form {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+b, strong {
+    font-weight: bolder;
+    margin: auto;
+    display: block;
+    text-align: center;
+}
+
+button, input {
+    max-width: 100%;
+    position: relative;
+    font-size: 20px;
+    border-radius: 20px;
+    border: 2px solid #7a7a7a;
+    transition: all -0.8s;
+    text-align: center;
+    width: 276px;
+}
+
+.submit {
+    z-index: 99;
+    width: 276px;
+    height: 31px;
+    background: linear-gradient(45deg, #F00, #FFE300);
+    border-radius: 20px;
+    color: #000;
+    font-size: 18px;
+    letter-spacing: 11px;
+}
+
+#parametrage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#box {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    max-width: 800px;
+    background: #FAFAFA;
+    padding: 30px;
+    margin: 50px auto;
+    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+    border-radius: 10px;
+    border: 6px solid #305A72;
+}
+
+div .password-icon {
+    width: 25px;
+    transition: all 0.2s;
+    margin-right: -26px;
+}
+
+    div .password-icon:hover {
+        cursor: pointer;
+        color: #ff4754;
+    }
+
+    div .password-icon .feather-eye-off {
+        display: none;
+    }
+
+#motDePasse {
+    width: 100%;
+    margin-top: 20px;
+    justify-content: center;
+    display: flex;
+}
+
+#valider {
+    margin-top: 20px;
+}
+
+#utilisateur {
+    margin-top: 20px;
+}
+
+@media (max-width: 680px) {
+
+    #box {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        background: #FAFAFA;
+        padding: 30px;
+        margin: 50px auto;
+        box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+        border-radius: 10px;
+        border: 6px solid #305A72;
+        width: 100%;
+    }
+
+    body {
+        background-size: auto;
+    }
+}

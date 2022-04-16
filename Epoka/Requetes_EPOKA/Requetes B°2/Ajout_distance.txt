@@ -1,0 +1,2 @@
+INSERT INTO relier (Id_Commune1, Id_Commune2, Distance) 
+        VALUES (:Id_Commune1, :Id_Commune2, :nouvelleDistance);

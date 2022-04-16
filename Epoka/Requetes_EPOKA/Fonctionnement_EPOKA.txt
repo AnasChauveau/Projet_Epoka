@@ -1,0 +1,71 @@
+
+A°)Je commence par m'authentifier : 
+	1.Dans le formulaire (POST),
+	  je dois remplir les champs qui ont pour name : identifiant et mdp;
+
+	2.Je les vérifies avec if(isset && !empty);
+
+	3.Si les champs sont mal remplis, faire un message d'erreur en dessous,
+  	  Sinon lancer la requete d'authentification.
+
+B°1)J'appuie que le bouton Paiement des frais
+	1.J'utilise la variable $compta récupéré dans la requete précédente;
+
+	2.Si $compta == 0, faire un h1 : Accès refusé !
+	  Sinon crée la page Paiement des missions comme dans la maquette,
+	  Et utilisé à l'intérieur la requete de "mission_validé" et mettre
+	  pour chaque bouton de mission;
+	
+	3.Si on appuie sur le bouton remboursée alors récupérer l'idMission
+	  et lancer la requete "confirm_paye" et remplacé le bouton 
+	  par un texte "remboursée".
+
+B°2)La distance entre reine et grenoble n'est pas saisi,
+    j'appuie sur paramétrage (ou paramétrage->Distance) 
+	1.Comme au dessus j'utilise la variable $compta;
+
+	2.1 Si $compta == 0, faire un h1 : Accès refusé !
+	  Sinon Crée la page Distance comme dans la maquette,
+	  avec 2 listes déroulantes avec name=idCommune[1et2] remplis 
+	  avec la requete "commune" et un champs name=distance;
+
+	  2.2 Si on clique sur valider, lancer la requete (POST) 
+ 	  "ajout_distance" avec $idCommune1, $idCommune2, $distance,
+	  (n'oublie pas de toujours faire des if(isset && !empty) 
+	   et de renvoyer des erreurs s'il le faut);
+
+
+	3.Afficher en dessous du formulaire, une liste faite avec la
+	  requete "distance_existante" comme dans la maquete.
+
+B°3)On m'a demandé de changer les forfaits,
+    j'appuie sur paramétrage (ou paramétrage->Forfaits)
+	1.Comme au dessus j'utilise la variable $compta
+
+	2.Si $compta == 0, faire un h1 : Accès refusé !
+	  Sinon Crée la page Forfait comme dans la maquette,
+	  avec les deux champs name=forfaitJours et forfaitKm
+	  qui sont déjà remplis avec la requete "getForfait";
+
+	3.Si on clique sur valider, lancer la requete (PUT)
+	  "modif_forfait" avec $forfaitJours et $forfaitKm,
+	  (n'oublie pas de toujours faire des if(isset && !empty) 
+	   et de renvoyer des erreurs s'il le faut);
+
+C°)J'appuie que le bouton Validation des missions
+	1.On utilise la requete "Verif_responsable" qui renvoi un chiffre/nombre;
+
+   	2.Si le résultat (de "Verif_responsable") n'est pas plus grand que 0,
+	  alors faire un h1 : Accès refusé ! Sinon Crée la page de validation
+	  comme dans la maquette, tout en utilisant la requete "List_Mission"
+ 	  pour tout remplir (metre les id dans les boutons);
+
+	3.Si on clique sur valider la requete "validation" (PUT) avec $identifiant
+	  (n'oublie pas de toujours faire des if(isset && !empty) 
+	   et de renvoyer des erreurs s'il le faut);
+
+
+	  
+
+
+

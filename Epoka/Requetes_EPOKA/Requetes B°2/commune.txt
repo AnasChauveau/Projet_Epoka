@@ -1,0 +1,5 @@
+SELECT idCommune AS ID, CONCAT(c.nomCommune, ' (' , c.cpCommune, ')') AS Commune 
+FROM commune c
+WHERE c.nomCommune LIKE '%:search'
+OR c.cpCommune LIKE '%:search'
+LIMIT 100;

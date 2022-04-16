@@ -1,0 +1,3 @@
+UPDATE parametre 
+SET forfaitJours = :forfaitJour, 
+    forfaitKm = :forfaitKm

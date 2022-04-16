@@ -1,0 +1,4 @@
+SELECT COUNT(*)
+FROM mission m
+INNER JOIN salarie s ON s.identifiant = m.identifiantSal
+WHERE identifiantResp = :idResp

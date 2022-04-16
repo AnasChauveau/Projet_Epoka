@@ -1,0 +1,20 @@
+SELECT
+			 m.idMission,
+                         prenomSal AS Prenom,
+                         nomSal AS Nom,
+                         dateDebut as Debut, 
+                         dateFin AS Fin, 
+                         valider,
+                         payer,
+			 CONCAT(c.nomCommune, '(', c.cpCommune, ')') AS Lieu,
+			 CASE 
+                            WHEN valider = 0 THEN ''
+                            WHEN valider = 1 AND payer = 1 THEN CONCAT('Validée, ', 'Remboursée')
+                            WHEN valider = 1 THEN 'Validée'
+                         END AS validation 
+                  FROM mission m
+                  INNER JOIN salarie s ON s.identifiant = m.identifiantSal
+		  INNER JOIN commune c ON c.idCommune = m.Id_Commune
+                  WHERE identifiantResp = :idResp
+                  AND dateFin BETWEEN SUBDATE(CURDATE(), 30) AND CURDATE()
+                  ORDER by validation, Fin;
