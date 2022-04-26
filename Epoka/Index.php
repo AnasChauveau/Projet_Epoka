@@ -9,18 +9,16 @@ session_destroy();
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="Index.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
     <title>Connexion</title>
 </head>
 <body>
     <div id="box" style="width: 348px;margin-top: 243px;height: 275px;">
-    <form method="post" action="/Epoka/GetIdentifiant.php">
+    <form method="post" action="<?php echo 'GetIdentifiant.php';?>">
             <div id="titreConnexion">
                 <h1> Connexion </h1>
             </div>
             <div id="utilisateur">
-                <input type="text" name="Login" id="Login" placeholder="Identifiant" />
+                <input type="text" name="Login" id="Login" placeholder="Identifiant" require/>
             </div>
             <div id="motDePasse">
                 <input type="password" name="Pwd" id="Pwd" placeholder="Mot de passe" required />

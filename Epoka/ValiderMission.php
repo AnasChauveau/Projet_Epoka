@@ -1,18 +1,29 @@
-<?php session_start(); ?>
+<?php
+// Récupération des identifiants 
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="Header.css" />
-    <link rel="stylesheet" href="fichier.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <title>Connexion</title>
-</head>
-<body style="background-color: #82bdc7; background-size: cover; width: 99%;">
+session_start();
 
-<?php include('header.php')?>
+include('BDD.php'); // On inclut le fichier avec la chaine de connexion 
+global $mysqlConnection; // Récuperation de la chaine de connection 
 
-</body>
+if (empty($_GET["id"]) || !isset($_GET["id"])) {
+    header('Location: /Projet_Epoka/Epoka/evenement.php?message=ERREUR%20:%20Mission%20introuvable%20!'); // redirection vers une page
+    die();
+  }
+
+$idMission = $_GET["id"];
+
+$sqlQuery = "UPDATE mission SET valider = 1 WHERE idMission = :idMission;";
+
+$req = $mysqlConnection->prepare($sqlQuery); // Préparation de la requête 
+$req->bindParam(':idMission', $idMission); // On remplace la valeur :idMission par la valeur récupéré en GET
+$req->execute(); // On execute la requête préparé
+
+$count = $req->rowCount();
+
+if ($count <= 0){
+    header('Location: /Projet_Epoka/Epoka/evenement.php?message=Echec%20de%20la%20validation%20!'); // redirection vers une page
+}else{
+    header('Location: /Projet_Epoka/Epoka/evenement.php?message=Validation%20réussi%20!'); // redirection vers une page
+}
+?>

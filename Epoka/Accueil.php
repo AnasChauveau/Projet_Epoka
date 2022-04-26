@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="Header.css" />
     <link rel="stylesheet" href="fichier.css" />
     <link rel="stylesheet" href="Index.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
     <title>Connexion</title>
 </head>
 <body>
-    <h1 style='margin-top: 150px; color: white; margin-left: 3%;'>Vous êtes Connecté !</h1>
-    
-<?php include('header.php')?>
+<?php include('header.php');
+    if (!empty($_SESSION["identifiant"]) && isset($_SESSION["identifiant"])) {
+        echo "<h1 style='margin-top: 150px; color: white; margin-left: 3%;'>Vous êtes Connecté !</h1>";
+    }
+?>
 
 </body>
 

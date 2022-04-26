@@ -1,3 +1,3 @@
-SELECT c1.nomCommune, c2.nomCommune, r.Distance FROM relier r
+SELECT c1.nomCommune, c2.nomCommune, Distance FROM relier 
 INNER JOIN commune c1 ON c1.idCommune = Id_Commune1
 INNER JOIN commune c2 ON c2.idCommune = Id_Commune2;

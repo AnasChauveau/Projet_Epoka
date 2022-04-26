@@ -199,10 +199,6 @@ caption {
  text-align:left;
  caption-side:bottom
 }
-th, td {
- width:200px;
- text-align: center;
-}
 label {
  display:inline-block;
  margin-bottom:.5rem
@@ -1459,6 +1455,12 @@ pre code {
  .offset-xl-11 {
   margin-left:91.666667%
  }
+}
+#listeDist{
+    min-width: 200px;
+}
+#tableMission{
+    max-width: 130px;
 }
 .table {
  width:100%;
@@ -9140,4 +9142,4 @@ a.text-dark:hover {
   border-color:#dee2e6
  }
 }
-/*# sourceMappingURL=bootstrap.min.css.map */
+/* sourceMappingURL=bootstrap.min.css.map */

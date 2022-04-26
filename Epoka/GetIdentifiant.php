@@ -10,12 +10,12 @@ $login = $_POST['Login']; // Recuperation de login
 $password = $_POST['Pwd']; // Recuperation de password
 
   if (empty($login) || !isset($login)) {
-    header('Location: http://localhost/Epoka?message=Le%20login%20manque'); // redirection vers une page
+    header('Location: /Projet_Epoka/Epoka?message=Le%20login%20manque'); // redirection vers une page
     die();
   } 
   
   if (empty($password) || !isset($password)) {
-    header('Location: http://localhost/Epoka?message=Le%20mot%20de%20passe%20manque'); // redirection vers une page
+    header('Location: /Projet_Epoka/Epoka?message=Le%20mot%20de%20passe%20manque'); // redirection vers une page
     die();
   }
 
@@ -38,9 +38,9 @@ $req->execute(); // On execute la requête préparé
 $num_rows = $req->fetchAll(PDO::FETCH_ASSOC);
 
 if ($num_rows[0]['Nombre'] <= 0){
-  header('Location: http://localhost/Epoka?message=Aucun%20compte%20trouve'); // redirection vers une page
+  header('Location: /Projet_Epoka/Epoka?message=Aucun%20compte%20trouve'); // redirection vers une page
 } else if ($num_rows[0]['Nombre'] > 1) {
-  header('Location: http://localhost/Epoka?message=Plusieurs%20compte%20cree'); // redirection vers une page
+  header('Location: /Projet_Epoka/Epoka?message=Plusieurs%20compte%20cree'); // redirection vers une page
 } else {
   $result = $req->fetchAll(PDO::FETCH_ASSOC);
 
@@ -48,7 +48,7 @@ if ($num_rows[0]['Nombre'] <= 0){
   $_SESSION["nom"] = $num_rows[0]['nomSal'];
   $_SESSION["prenom"] = $num_rows[0]['prenomSal'];
   $_SESSION["comptable"] = $num_rows[0]['comptable'];
-  header('Location: http://localhost/Epoka/Accueil.php'); // redirection vers une page
+  header('Location: Accueil.php'); // redirection vers une page
 }
 
 $result = $req->fetchAll(PDO::FETCH_ASSOC);
