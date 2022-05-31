@@ -85,7 +85,7 @@ if (empty($row)){
                 echo("</td></tr>");
             }
         }else{
-            echo "<h1 style='margin-top: 150px; color: white;  margin-left: 3%;'>Une erreur est survenu ! <a href='Accueil.php'> Retour</a></h1>";
+            echo "<h1 style='margin-top: 150px; color: white;  margin-left: 3%;'>Aucune Mission Trouvé ! <a href='Accueil.php'> Retour</a></h1>";
         }  
     }
 
